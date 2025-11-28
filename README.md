@@ -80,12 +80,13 @@ Project layout:
 ```
 nscout/
 ├── nscout/
-│   ├── __init__.py
-│   ├── cli.py          # command-line interface
-│   └── checker.py      # availability logic
+│   ├── checker.py      # core logic
+│   ├── cli.py          # command line interface
+│   └── __init__.py
 ├── pyproject.toml
-├── README.md
-└── LICENSE
+├── .gitignore
+└── README.md
+
 ```
 
 ## **Notes**
