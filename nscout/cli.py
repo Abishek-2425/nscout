@@ -18,16 +18,22 @@ def display(label, status):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("name", help="Package name to check")
-    parser.add_argument("--version", action="store_true", help="Show nscout version")
+
+    # Proper version flag (works without requiring "name")
+    from . import __version__
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"nscout {__version__}"
+    )
+
+    # Required package name argument
+    parser.add_argument(
+        "name",
+        help="Package name to check"
+    )
 
     args = parser.parse_args()
-
-    if args.version:
-        from . import __version__
-        print(__version__)
-        sys.exit(0)
-
     pkg = args.name.strip()
 
     pypi_status = check_name(pkg, PYPI)
@@ -36,5 +42,6 @@ def main():
     display("PyPI:", pypi_status)
     display("TestPyPI:", testpypi_status)
 
+    # Non-zero exit when taken (allows scripting)
     if pypi_status == "taken":
         sys.exit(1)
