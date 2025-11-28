@@ -1,6 +1,6 @@
 [project]
 name = "nscout"
-version = "0.1.1"
+version = "0.1.2"
 description = "A lightweight CLI tool to check whether a package name is taken on PyPI and TestPyPI."
 readme = "README.md"
 requires-python = ">=3.10"
