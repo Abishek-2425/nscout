@@ -42,3 +42,6 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+# python version
+.python-version
