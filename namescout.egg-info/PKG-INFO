@@ -1,0 +1,106 @@
+Metadata-Version: 2.4
+Name: namescout
+Version: 0.1.0
+Summary: A lightweight CLI tool to check whether a package name is taken on PyPI and TestPyPI.
+Author-email: Abishek S <abishek642005@gmail.com>
+License-Expression: MIT
+Classifier: Development Status :: Beta
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python
+Classifier: Environment :: Console
+Classifier: Topic :: Utilities :: Libraries :: Python Modules
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: httpx
+
+# **namescout**
+
+A small command-line tool for checking whether a package name is already taken on **PyPI** and **TestPyPI**.
+It queries PyPI’s public JSON endpoints and reports the results in a simple, readable format.
+
+---
+
+## **Features**
+
+* Checks availability on both PyPI and TestPyPI
+* No special exit codes — clear human-readable output only
+* Minimal dependencies, very fast
+* Works on Python 3.10+
+
+---
+
+## **Installation**
+
+From PyPI (after publishing):
+
+```bash
+pip install namescout
+```
+
+For local development:
+
+```bash
+pip install -e .
+```
+
+---
+
+## **Usage**
+
+Run:
+
+```bash
+namescout <package-name>
+```
+
+Example:
+
+```bash
+namescout requests
+```
+
+Output:
+
+```
+PyPi : taken
+TestPyPi : not taken
+```
+
+The tool always prints exactly these two lines — no exit-code text.
+
+---
+
+## **Why this tool exists**
+
+PyPI doesn’t have a dedicated “is this name available?” endpoint.
+This tool performs a lightweight check against PyPI’s JSON metadata URLs:
+
+* If the endpoint returns **404**, the name is **not taken**
+* Any other response means the name exists or the server is unreachable
+
+This makes the tool quick, reliable, and easy to use during package creation.
+
+---
+
+## **Development**
+
+Run directly from source:
+
+```bash
+python -m namescout <package-name>
+```
+
+Project layout:
+
+```
+namescout/
+├── namescout/
+│   ├── __init__.py
+│   ├── cli.py          # command-line interface
+│   └── checker.py      # availability logic
+├── pyproject.toml
+├── README.md
+└── LICENSE
+```
+
+---

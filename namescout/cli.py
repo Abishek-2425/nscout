@@ -5,7 +5,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("name", help="Package name to check")
     args = parser.parse_args()
-    pkg = args.name
+    
+    pkg = args.name.strip()
 
     pypi_status = check_name(pkg, PYPI)
     testpypi_status = check_name(pkg, TESTPYPI)
