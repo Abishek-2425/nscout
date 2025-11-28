@@ -1,4 +1,4 @@
-# **nscout**
+## **nscout**
 
 A small command-line tool for checking whether a package name is already taken on **PyPI** and **TestPyPI**.
 It queries PyPI’s public JSON endpoints and reports the results in a simple, readable format.
@@ -16,7 +16,7 @@ It queries PyPI’s public JSON endpoints and reports the results in a simple, r
 
 ## **Installation**
 
-From PyPI (after publishing):
+From PyPI:
 
 ```bash
 pip install nscout
@@ -63,7 +63,7 @@ This tool performs a lightweight check against PyPI’s JSON metadata URLs:
 * If the endpoint returns **404**, the name is **not taken**
 * Any other response means the name exists or the server is unreachable
 
-This makes the tool quick, reliable, and easy to use during package creation.
+This keeps the tool fast, predictable, and convenient during package creation.
 
 ---
 
@@ -88,4 +88,16 @@ nscout/
 └── LICENSE
 ```
 
+## **Notes**
+
+nscout stays intentionally small and focused. If it helps you ship cleaner packages, the project has done its job.
+
+It was built for the tiny moments that slow releases down, and smoothing even one step in your workflow makes it worthwhile.
+
+The project is open to thoughtful improvements and small quality-of-life contributions.
+
+Future growth will be deliberate—only in places where it clearly adds value, like lightweight automation hooks or CI-friendly helpers.
+
 ---
+
+**Powered by Python, fueled by caffeine, guided by late-night curiosity ☕🚀**
