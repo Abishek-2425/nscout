@@ -1,3 +1,8 @@
+import httpx
+
+PYPI = "https://pypi.org/pypi/{}/json"
+TESTPYPI = "https://test.pypi.org/pypi/{}/json"
+
 def check_name(name: str, registry_url: str) -> str:
     url = registry_url.format(name)
     try:
