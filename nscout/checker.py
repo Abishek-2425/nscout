@@ -1,5 +1,7 @@
 import httpx
 from datetime import datetime
+from .cache import get as cache_get, set as cache_set, make_key
+
 
 PYPI = "https://pypi.org/pypi/{}/json"
 TESTPYPI = "https://test.pypi.org/pypi/{}/json"
@@ -9,13 +11,24 @@ TESTPYPI = "https://test.pypi.org/pypi/{}/json"
 # Internal helper: safe HTTP GET
 # ---------------------------------------------------------------------------
 def _safe_get(url: str):
+    # ---- CACHE CHECK ----
+    key = make_key("GET", url)
+    cached = cache_get(key)
+    if cached is not None:
+        return cached  # (response, error)
+
+    # ---- NETWORK CALL ----
     try:
         response = httpx.get(url, timeout=3)
-        return response, None
+        result = (response, None)
     except httpx.TimeoutException:
-        return None, {"type": "timeout", "detail": "Request timed out"}
+        result = (None, {"type": "timeout", "detail": "Request timed out"})
     except httpx.RequestError as e:
-        return None, {"type": "network", "detail": str(e)}
+        result = (None, {"type": "network", "detail": str(e)})
+
+    # ---- STORE IN CACHE ----
+    cache_set(key, result)
+    return result
 
 
 # ---------------------------------------------------------------------------
